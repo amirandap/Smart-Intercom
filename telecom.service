@@ -1,0 +1,28 @@
+[Unit]
+Description=Telegram Intercom
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u v27.py
+WorkingDirectory=/home/pi/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
+
+
+sudo cp telecom.service /etc/systemd/system/telecom.service
+
+sudo systemctl start telecom.service
+sudo systemctl start mqtt.service
+
+
+sudo cp mqtt.service /etc/systemd/system/mqtt.service
+
+sudo systemctl stop  mqtt.service
+sudo systemctl stop  telecom.service
+sudo systemctl enable telecom.service
+sudo systemctl enable mqtt.service

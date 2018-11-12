@@ -1,0 +1,33 @@
+mqtt:
+  host: 10.0.0.235
+  port: 1883
+  user: "USERNAME"
+  password: "PASSWORD"
+  topic_prefix: intercompi
+  status_topic: status
+  status_payload_running: running
+  status_payload_stopped: stopped
+  status_payload_dead: dead
+
+gpio_modules:
+  - name: raspberrypi
+    module: raspberrypi
+    cleanup: yes  # This optional boolean value sets whether the module's `cleanup()` function will be called when the software exits.
+
+digital_inputs:
+  - name: doorbell
+    module: raspberrypi
+    pin: 23
+    on_payload: "ON"
+    off_payload: "OFF"
+    pullup: no
+    pulldown: yes
+    
+digital_outputs:
+  - name: lock
+    module: raspberrypi
+    pin: 27
+    on_payload: "ON"
+    off_payload: "OFF"
+    initial: low  # This optional value controls the initial state of the pin before receipt of any messages from MQTT. Valid options are 'low' and 'high'.
+    retain: yes # This op
